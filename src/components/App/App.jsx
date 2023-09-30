@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { ToastContainer } from 'react-toastify';
-import { searchPhoto } from '../ImageInfo/image';
+import { searchPhoto } from '../../services/image';
 import { toast } from 'react-toastify';
 import { ImageGalery } from '../ImageGallery/ImageGallery';
 import { Button } from '../Button/Button';
@@ -26,12 +26,6 @@ export class App extends Component {
       this.setState({ isloading: true });
 
       searchPhoto(photoName, page)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(response.status);
-          }
-          return response.json();
-        })
         .then(data => {
           if (data.totalHits === 0) {
             toast.warning(
